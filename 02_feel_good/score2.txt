@@ -1,0 +1,5 @@
+mo	99	female
+zhang	85	female
+mage	100	male
+wang	90	male
+li	93	male
