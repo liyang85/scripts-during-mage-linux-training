@@ -1,0 +1,23 @@
+#!/usr/bin/env expect
+#
+#===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== 
+# Filename:		auto_ssh_by_liyang.expect
+# Revision:		1.0
+# Date:			2018-01-06
+# Description:
+# Author:		Li Yang
+# Website:		https://liyang85.com
+#===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== 
+
+# variable assignment: `set var_name value`
+# positional parameter: `[lindex $argv 0..n]`
+set ip [lindex $argv 0]
+set user [lindex $argv 1]
+set passwd [lindex $argv 2]
+
+spawn ssh $user@$ip
+expect {
+	"yes/no" {send "yes\n"; exp_continue}
+	"password" {send "$passwd\n"}
+}
+interact
