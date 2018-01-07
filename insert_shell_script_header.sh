@@ -9,9 +9,8 @@ cat << _EOF_ > ${fullFileName}
 #
 #===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== 
 # Filename:		${fullFileName}
-# Revision:		1.0
-# Date:			`date +%F`
 # Description:
+# Date:			`date +%F`
 # Author:		Li Yang
 # Website:		https://liyang85.com
 #===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== 
