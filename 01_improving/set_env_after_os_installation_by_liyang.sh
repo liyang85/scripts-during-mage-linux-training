@@ -24,7 +24,7 @@ modSshd() {
 		-e '/#UseDNS/a UseDNS no' \
 		-e 's/(GSSAPIAuthentication )yes/\1no/' \
 		${sshdCfg}
-	echo "${sshdCfg} modified."
+	echo "${sshdCfg} modified, original file had been saved in ${sshdCfg}.bak"
 }
 
 modSshd
