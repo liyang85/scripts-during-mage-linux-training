@@ -10,7 +10,10 @@
 
 [ `id -u` -ne 0 ] && echo "Only root can run this script." && exit 1
 
-# global variables
+# ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
+# Part 0: Global variables
+# ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
+
 # all others variables MUST be put in related function,
 # so them can be local.
 osVer=`sed -r 's/.* ([0-9]+)\..*/\1/' /etc/centos-release`
@@ -40,7 +43,7 @@ upIface() {
 		ONBOOT=yes
 		DNS1=223.5.5.5
 	EOF
-	echo "${firstIfPath} created."
+	echo -e "\n${firstIfPath} created."
 
 	# restart network
 	if [[ "${osVer}" -eq 6 ]]; then
@@ -84,7 +87,7 @@ if [[ "${osVer}" -eq 6 ]]; then
 elif [[ "${osVer}" -eq 7 ]]; then
 	iptables -F
 	systemctl stop firewalld
-	systemctl disable firewalld > /dev/null
+	systemctl disable firewalld &> /dev/null
 	echo "Firewalld disabled."
 fi
 echo -e "${separator}"
@@ -109,8 +112,8 @@ upAutofs() {
 		chkconfig autofs on
 	elif [[ "${osVer}" -eq 7 ]]; then
 		systemctl start autofs \
-			&& echo "autofs started."
-		systemctl enable autofs
+			&& echo -e "\nAutofs started."
+		systemctl enable autofs &> /dev/null
 	fi
 }
 upAutofs
@@ -194,8 +197,8 @@ installPrename() {
 	pRenamePath="${localBin}/prename"
 	mkdir "${pRenamePath}"
 	git clone https://github.com/ap/rename.git "${pRenamePath}"
-	ln -s "${pRenamePath}/rename" "${localBin}/prename"
-	echo "pRename installed."
+	ln -s "${pRenamePath}/rename" "${localBin}/rename" \
+		&& echo "pRename installed."
 }
 installPrename
 echo -e "${separator}"
@@ -204,7 +207,8 @@ echo -e "${separator}"
 # Part 5: dotfiles under $HOME
 # ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
 
-git clone https://github.com/liyang85/dotfiles.git ${HOME}
+cd
+git clone https://github.com/liyang85/dotfiles.git
 bash ${HOME}/dotfiles/bootstrap.sh
 echo -e "${separator}"
 
