@@ -16,14 +16,13 @@ remoteSshDir="~/.ssh"
 
 declare userName
 
-read -p 'Copy to which user on the host? [Default is root, enter Y to select] -> '
-if [[ ${REPLY} =~ ^[Yy]$ ]]; then
-	userName=root
-else
-	userName="$REPLY"
+read -p 'Copy to which user on the host? [Default is root, enter Y to select] -> ' user
+if [[ ${user} =~ ^[Yy]$ ]]; then
+	user=root
 fi
 
+echo
 read -p "Copy to which host? [Allow multiple hosts, use SPACE to separate] -> "
 for host in $REPLY; do
-	scp "${sshCfg}" "${userName}@${host}:${remoteSshDir}"
+	scp "${sshCfg}" "${user}@${host}:${remoteSshDir}"
 done
