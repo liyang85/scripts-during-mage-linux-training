@@ -23,7 +23,8 @@ dest="${HOME}/Google 云端硬盘/magedu-linux-training-27/pdf/"
 # if a line of `df` output contains the path and the last field equal to 
 # $smbSrc, that means the samba shared dir has been mounted on $smbSrc.
 [[ "`df | awk '/172\.18\.0\.1\/27/{print $NF}'`" == "${smbSrc}" ]] \
-	|| { echo -e "\nmounting...\n"; 
+	|| { 
+		echo -e "\nmounting...\n"; 
 		/sbin/mount -t smbfs //magedu27:magedu27@172.18.0.1/27 "${smbSrc}";
 }
 
