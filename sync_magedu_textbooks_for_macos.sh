@@ -24,11 +24,11 @@ dest="${HOME}/Google 云端硬盘/magedu-linux-training-27/pdf/"
 # $smbSrc, that means the samba shared dir has been mounted on $smbSrc.
 [[ "`df | awk '/172\.18\.0\.1\/27/{print $NF}'`" == "${smbSrc}" ]] \
 	|| { 
-		echo -e "\nmounting...\n"; 
+		echo -e "\nMounting...\n"; 
 		/sbin/mount -t smbfs //magedu27:magedu27@172.18.0.1/27 "${smbSrc}";
 }
 
-default="rsync -ahivz"
+default="rsync -ahiv"
 # there must be a slash (/)
 ${default} --dry-run "${pdfSrc}/" "${dest}"
 
