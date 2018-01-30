@@ -30,7 +30,7 @@ dest="/Volumes/WD-USB-HDD/magedu-linux-27"
 		/sbin/mount -t smbfs //magedu27:magedu27@172.18.0.1/27 "${smbSrc}";
 }
 
-default="rsync -ahivz --progress"
+default="rsync -ahiv --progress"
 # there must be a slash (/)
 ${default} --dry-run "${smbSrc}/" "${dest}"
 
