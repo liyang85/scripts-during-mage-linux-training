@@ -40,6 +40,22 @@ if [[ $REPLY = [YyNn] ]]; then
 	if [[ $REPLY = [Yy] ]]; then
 		# there must be a slash (/)
 		${default} "${pdfSrc}/" "${dest}"
+
+		echo -e "\n===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====\n"
+
+		# make a review list which can be added to dida365.com
+		date=`date +"%F%T"`
+		lstName="pdf.lst.${date//[-:]}"
+		cd "${dest}" \
+			&& find . -mindepth 1 -maxdepth 1 -iname '*.pdf' \
+			| sed -r -e 's/\.\///' \
+			-e 's/^([0-9])([^[:digit:]].*)/0\1\2/' \
+			-e 's/^([0-9]{2})/\1 /' \
+			-e 's/\.pdf//' \
+			| sort -n > "${lstName}"
+		echo -e "Below is the newest pdf list, please add it to dida365.com: \n"
+		cat "${lstName}"
+		cd
 	else
 		echo -e "\nYou have to manual run rsync with different options, current are: \n${default}"
 		exit 2
