@@ -30,7 +30,9 @@ dest="/Volumes/WD-USB-HDD/magedu-linux-27"
 		/sbin/mount -t smbfs //magedu27:magedu27@172.18.0.1/27 "${smbSrc}";
 }
 
-default="rsync -ahiv --progress"
+# Do not need `-z`, because the transmission is between local PC and a removable HDD.
+# The receiver is an exFAT drive which is not support permissions, so use `--no-perms`.
+default="rsync -ahiv --progress --no-perms"
 # there must be a slash (/)
 ${default} --dry-run "${smbSrc}/" "${dest}"
 
