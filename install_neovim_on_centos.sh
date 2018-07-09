@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== 
-# Filename:		linux_install_neovim_by_liyang.sh
+# Filename:		install_neovim_on_centos.sh
 # Description:
 # Date:			2018-05-14
 # Author:		Li Yang
@@ -16,7 +16,7 @@ chmod +x nvim
 chown root:root nvim
 
 mv nvim /usr/local/bin/
-ln -s nvim /usr/local/bin/nvi
+#ln -s nvim /usr/local/bin/nvi
 
 mkdir -p ~/.config/nvim
 wget https://raw.githubusercontent.com/liyang85/dotfiles/master/init.vim \
@@ -31,10 +31,9 @@ yum install epel-release -y
 yum install python36 -y
 ln -s python36 /usr/bin/python3
 
-# Install pip and pip3
+# Install pip3
 curl -O https://bootstrap.pypa.io/get-pip.py
 python3 get-pip.py
 
 # Install NeoVim Python module
 pip3 install --upgrade neovim
-
